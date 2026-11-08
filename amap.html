@@ -1,0 +1,17 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>amap-key-probe</title></head>
+<body><div id="r">INIT</div><div id="m" style="width:300px;height:200px"></div>
+<script>
+var out=[];function w(s){out.push(s);document.getElementById('r').textContent=out.join(' | ');}
+window.onerror=function(m){w('ERR:'+m);};
+w('origin='+location.host);
+</script>
+<script src="https://webapi.amap.com/maps?v=1.4.15&key=e8d6381ca3e0cb01a4ce7e59800afd5a"></script>
+<script>
+try{
+  if(window.AMap){ w('AMap=ok');
+    var map=new AMap.Map('m',{zoom:10,center:[116.39,39.9]});
+    map.on('complete',function(){ w('MAP_COMPLETE'); });
+    setTimeout(function(){ w('tiles='+document.querySelectorAll('img').length); },4000);
+  } else { w('AMap=undefined'); }
+}catch(e){ w('EX:'+e.message); }
+</script></body></html>
