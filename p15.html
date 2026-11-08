@@ -1,0 +1,32 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>p15</title></head>
+<body style="font-size:13px;padding:8px"><div id="r" style="white-space:pre-wrap">INIT</div>
+<script>
+var out=[];
+function w(s){out.push(s);var e=document.getElementById('r');if(e)e.textContent=out.join('\n');}
+function call(n,p,tag){
+  try{
+    AlipayJSBridge.call(n,p||{},function(r){
+      var s='';try{s=JSON.stringify(r||{});}catch(e){s='?'}
+      w(tag+'='+s.slice(0,90));
+    });
+  }catch(e){ w(tag+'_EX'); }
+}
+function fire(){
+  w('JSB='+(typeof AlipayJSBridge));
+  w('DOM='+document.domain);
+  w('CK='+document.cookie.slice(0,120));
+  call('getSystemInfo',{},'SYS');
+  call('getUserInfo',{},'USER');
+  call('getAuthUserInfo',{},'AUTHU');
+  call('getAuthCode',{scopes:['auth_base']},'CODE');
+  call('getAuthorize',{scopes:['auth_base']},'AUTHZ');
+  call('getClientInfo',{},'CLI');
+  call('getTBCode',{},'TBCODE');
+  call('getTBSessionInfo',{},'TBS');
+  call('checkApp',{appId:'68687655'},'CHK');
+  call('rpc',{operationType:'alipay.client.getUserInfo',requestData:{}},'RPC');
+  call('sendMtop',{operationType:'alipay.client.getUserInfo',requestData:{}},'MTOP');
+  setTimeout(function(){w('END');},9000);
+}
+if(window.AlipayJSBridge&&AlipayJSBridge.call){fire();}else{document.addEventListener('AlipayJSBridgeReady',fire,false);}
+</script></body></html>
